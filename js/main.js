@@ -25,10 +25,10 @@ const getLakes = async (lat, long) => {
 
 const markLakes = async (lat, long) => {
     const lakes = await getLakes(lat, long)
-    console.log(lakes)
     for (lake of lakes.value) {
+        console.log(lake)
         let marker = L.marker([lake.KoordErLat, lake.KoordErLong]).addTo(map);
-        marker.bindPopup("<b>" + lake.Nimi + "</b><br>" + lake.KuntaNimi).openPopup();
+        marker.bindPopup("<b>" + lake.Nimi + "</b><br>" + lake.KuntaNimi + "<br><a href='https://maps.google.com/?q=" + lake.KoordErLat + "," + lake.KoordErLong + "' target='!blank'>Google Maps</a>").openPopup();
     }
 }
 
