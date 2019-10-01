@@ -7,11 +7,13 @@ L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 const getLakes = async (lat, long) => {
-    console.log('got ' + lat + " " + long)
-    const latGt = lat - 0.10
-    const latLt = lat + 0.10
-    const longGt = long - 0.10
-    const longLt = long + 0.10
+    console.log('got ' + lat + " " + long);
+    const latGt = lat - 0.10000;
+    const latLt = lat + 0.10000;
+    const longGt = long - 0.10000;
+    const longLt = long + 0.10000;
+
+    console.log('latGt ' + latGt +'  latLt ' + latLt +'  longGt ' + longGt +'  longLt ' + longLt);
 
     const url = lakeAPI + "?$top=100&$filter=KoordErLong gt '"+ longGt +"' and KoordErLong lt '"+ longLt +"' and KoordErLat gt '"+ latGt +"' and KoordErLat lt '"+ latLt +"'"
     try {
@@ -34,7 +36,7 @@ const markLakes = async (lat, long) => {
 
 map.on('click', function(e){
     var coord = e.latlng;
-    var lat = coord.lat.toFixed(2);
-    var long = coord.lng.toFixed(2);
-    markLakes(lat, long)
+    var lat = coord.lat;
+    var long = coord.lng;
+    markLakes(lat, long);
     });
