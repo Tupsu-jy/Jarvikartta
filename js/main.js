@@ -5,7 +5,7 @@ const map = L.map('map').setView([61.92, 25.74], 6);
 L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
-
+//jofsajopigwje
 const getLakes = async (lat, long) => {
     console.log('got ' + lat + " " + long);
     const latGt = lat - 0.10000;
