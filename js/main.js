@@ -1,5 +1,5 @@
 const lakeAPI =
-    "http://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
+    "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
 
 const map = L.map("map").setView([61.92, 25.74], 6)
 const markerLayer = L.layerGroup().addTo(map)
