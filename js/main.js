@@ -13,7 +13,7 @@ const searchLegend = L.control({ position: "topright", interactive: false })
 searchLegend.onAdd = map => {
     let div = L.DomUtil.create("div", "legend")
     div.innerHTML =
-        '<b>Top 10</b><br><select id="select" onchange="changeSearch()"><option>Valitse</option><option>Tilavuus</option><option>Syvyys</option><option>Vesiala</option><option>Rantaviiva</option></select>'
+        '<b>Top 20</b><br><select id="select" onchange="changeSearch()"><option>Valitse</option><option>Tilavuus</option><option>Syvyys</option><option>Vesiala</option><option>Rantaviiva</option></select>'
     L.DomEvent.disableClickPropagation(div)
     return div
 }
@@ -22,13 +22,13 @@ searchLegend.addTo(map)
 const changeSearch = () => {
     const selectValue = document.getElementById("select").value
     if (selectValue === "Tilavuus") {
-        markLakes(lakeAPI + "?$top=10&$orderby=Tilavuus desc", "top")
+        markLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc", "top")
     } else if (selectValue === "Syvyys") {
-        markLakes(lakeAPI + "?$top=10&$orderby=SyvyysSuurin desc", "top")
+        markLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc", "top")
     } else if (selectValue === "Vesiala") {
-        markLakes(lakeAPI + "?$top=10&$orderby=Vesiala10000 desc", "top")
+        markLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc", "top")
     } else if (selectValue === "Rantaviiva") {
-        markLakes(lakeAPI + "?$top=10&$orderby=Rantaviiva10000 desc", "top")
+        markLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc", "top")
     }
 }
 
@@ -60,6 +60,11 @@ const markLakes = async (url, method) => {
             var marker = L.marker([lake.KoordErLat, lake.KoordErLong]).addTo(
                 markerLayer
             )
+        }
+        for (i in lake) {
+            if (lake.hasOwnProperty(i)) {
+                if (lake[i] === null) lake[i] = "-"
+            }
         }
         marker
             .bindPopup(
