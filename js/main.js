@@ -2,9 +2,20 @@ const lakeAPI =
     "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
 
 const map = L.map("map").setView([61.92, 25.74], 6)
-const markerLayer = L.layerGroup().addTo(map)
+const markerLayer = L.layerGroup().addTo(map)  
+
 let haku=null;
 let onkokartta=false;
+
+let currentLat = null
+let currentLong = null
+
+const setCurrentPosition = (position) => {
+    currentLat = position.coords.latitude
+    currentLong = position.coords.longitude
+}
+
+navigator.geolocation.getCurrentPosition(setCurrentPosition);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
@@ -122,24 +133,22 @@ map.on("click", function(e) {
 Alat = 60.192059;
 Alon = 24.945831;
 
-function haeReitti(Llat, Llon){
-
+const haeReitti = (Llat, Llon) => {
     if(onkokartta==false){
         haku = L.Routing.control({
             waypoints: [
-                null,
+                L.latLng(currentLat, currentLong),
                 L.latLng(Llat, Llon)
             ],
             routeWhileDragging: true,
             geocoder: L.Control.Geocoder.nominatim()
         }).addTo(map)
-    }else{
+    } else {
         haku.setWaypoints([
-            null,
+            L.latLng(currentLat, currentLong),
             L.latLng(Llat, Llon)
         ])
     }
-
     onkokartta=true;
 }
 
