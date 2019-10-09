@@ -142,3 +142,4 @@ function haeReitti(Llat, Llon){
 
     onkokartta=true;
 }
+
