@@ -3,6 +3,8 @@ const lakeAPI =
 
 const map = L.map("map").setView([61.92, 25.74], 6)
 const markerLayer = L.layerGroup().addTo(map)
+let haku=null;
+let onkokartta=false;
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
@@ -88,6 +90,7 @@ const markLakes = async (url, method) => {
                     "," +
                     lake.KoordErLong +
                     "' target='!blank'>Google Maps</a>" +
+                    "<br><button type=\"button\" onclick=\"haeReitti(lake.KoordErLat, lake.KoordErLong)\">Hae reitti</button>"+
                     "</div>"
             )
             .openPopup()
@@ -116,3 +119,26 @@ map.on("click", function(e) {
         "'"
     markLakes(url)
 })
+Alat = 60.192059;
+Alon = 24.945831;
+
+function haeReitti(Llat, Llon){
+
+    if(onkokartta==false){
+        haku = L.Routing.control({
+            waypoints: [
+                null,
+                L.latLng(Llat, Llon)
+            ],
+            routeWhileDragging: true,
+            geocoder: L.Control.Geocoder.nominatim()
+        }).addTo(map)
+    }else{
+        haku.setWaypoints([
+            null,
+            L.latLng(Llat, Llon)
+        ])
+    }
+
+    onkokartta=true;
+}
