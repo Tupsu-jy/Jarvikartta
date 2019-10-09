@@ -1,0 +1,70 @@
+body {
+    height: 100vh;
+    margin: 0;
+    background: lightblue;
+    overflow-y: hidden;
+}
+h1 {
+    font-style: italic;
+    width: 300px;
+    margin: auto;
+}
+
+.video {
+    width: 420px;
+    height: 315px;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+.left a{
+    position: absolute;
+    padding: 12px;
+    width: 100px;
+    top: 0;
+    left: 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: dodgerblue;
+    color: black;
+
+}
+
+.right a{
+    position: absolute;
+    padding: 12px;
+    width: 100px;
+    top: 0;
+    right: 0;
+    text-align: center;
+    text-decoration: none;
+    font-size: 17px;
+    background-color: dodgerblue;
+    color: black;
+
+}
+
+.right a:hover{
+    background-color: black;
+    color: white;
+}
+
+.left a:hover{
+    background-color: black;
+    color: white;
+}
+#map {
+    height: 100%;
+}
+
+.popup {
+    text-align: center;
+}
+
+.legend {
+}
+
+.top {
+    font-size: 2em;
+}
