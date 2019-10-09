@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css" />
+    <link rel="stylesheet" href="css/main.css" />
+    <link rel="stylesheet" href="css/reititys.css" />
+    <link rel="stylesheet" href="css/geokoodaus.css" />
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
+
+    <script src="js/geokoodaus.js"></script>
+    <script src="js/reititys.js"></script>
+</head>
+<body>
+
+<h1>JÄRVIKARTTA</h1>
+
+
+<div class="left"><a href="index.html" target="_blank">Kartta</a> </div>
+<div class="right"><a href="#" target="_blank">Ohje</a> </div>
+<video id="video" autoplay loop muted  playsinline  preload="auto">
+    <source  media="screen and (min-device-width: 721px)" src="kuvat/jarvid_muokattu.mp4" type="video/mp4">
+    <source  media="screen and (max-device-width: 720px)" src="kuvat/jarvid_muokattu.mp4" type="video/mp4">
+    <source media="screen and (max-device-width: 640px)" src="kuvat/jarvid_muokattu.mp4" type="video/mp4">
+
+</video>
+
+<!--<video class="video" autoplay loop muted playsinline preload="auto">
+    <source  media="screen and (min-device-width: 721px)" src="kuvat/katu.mp4" type="video/mp4">
+    <source  media="screen and (max-device-width: 720px)" src="kuvat/katu.mp4" type="video/mp4">
+    <source media="screen and (max-device-width: 640px)" src="kuvat/katu.mp4" type="video/mp4">
+    <source media="screen" src="kuvat/katu.mp4" type="video/mp4">
+</video>-->
+</body>
+<script src="js/main.js"></script>
+<script src="js/piilota_video.js"></script>
+</html>
