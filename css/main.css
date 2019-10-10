@@ -72,6 +72,11 @@ body {
     justify-content: center;
 }
 
+.summary {
+    cursor: pointer;
+    font-size: 1.1em;
+}
+
 .haku {
     display: flex;
     justify-content: flex-end;
@@ -95,7 +100,10 @@ body {
     text-align: center;
 }
 
-.legend {
+.leaflet-popup-content {
+    margin: 8px 12px;
+    line-height: 1.6;
+    min-width: 200px;
 }
 
 .top {

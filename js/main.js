@@ -50,6 +50,7 @@ const changeSearch = () => {
 }
 
 const getLakes = async url => {
+    url += "&$expand=JarviSaannostely"
     try {
         const response = await fetch(url)
         const responseJSON = await response.json()
@@ -74,6 +75,7 @@ form.addEventListener("submit", searchLakes, true);
 
 const markLakes = async (url, method) => {
     const lakes = await getLakes(url)
+    console.log(lakes)
     markerLayer.clearLayers()
     let number = 1
     for (lake of lakes.value) {
@@ -96,14 +98,36 @@ const markLakes = async (url, method) => {
                 if (lake[i] === null) lake[i] = "-"
             }
         }
+        let saannostely = lake.JarviSaannostely[0]
+        console.log(saannostely)
+        if (!saannostely) {
+            saannostely = "Ei löytynyt"
+        } else {
+            for (i in saannostely) {
+                if (saannostely.hasOwnProperty(i)) {
+                    if (saannostely[i] === null) saannostely[i] = "-"
+                }
+            }
+            saannostely = "Tarkoitus: " +
+            saannostely.Tarkoitus +
+            "<br>Säännöstelyn aloitusvuosi: " + 
+            saannostely.VuosiAlku +
+            "<br>Virtaamahavaintoasteikko: " +
+            saannostely.AsteikkoQ +
+            "<br>Vedenkorkeushavaintoasteikko: " +
+            saannostely.AsteikkoW +
+            "<br>Lisätieto: " +
+            saannostely.Lisatieto
+        }
         marker
             .bindPopup(
                 "<div class='popup'>" +
                     "<b>" +
                     lake.Nimi +
-                    "</b><br> Kunta: " +
+                    "</b><br>Kunta: " +
                     lake.KuntaNimi +
-                    "<br> Syvyys keskimäärin: " +
+                    "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" + 
+                    "Syvyys keskimäärin: " +
                     lake.SyvyysKeski +
                     " m<br> Suurin syvyys: " +
                     lake.SyvyysSuurin +
@@ -113,7 +137,11 @@ const markLakes = async (url, method) => {
                     lake.Tilavuus +
                     " m³<br> Järven pinta-ala: " +
                     lake.Vesiala10000 +
-                    " ha<br><a href='https://maps.google.com/?q=" +
+                    " ha<br></details>" + 
+                    "<details><summary class='summary'><b>Säännöstely</b></summary>" +
+                    saannostely +
+                    "</details>" +
+                    "<br><a href='https://maps.google.com/?q=" +
                     lake.KoordErLat +
                     "," +
                     lake.KoordErLong +
