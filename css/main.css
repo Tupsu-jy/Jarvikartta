@@ -18,19 +18,18 @@ body {
 }
 
 .navbar {
-    margin-left: 50px;
+    margin-left: 5vw;
     position: absolute;
     z-index: 3;
-    width: 100%;
+    width: 95vw;
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: 29vw 33vw 33vw;
     grid-template-rows: 1fr;
     grid-column-gap: 0px;
     grid-row-gap: 0px;
 }
 
 .links {
-
     display: flex;
     justify-content: left;
     margin-top: auto;
