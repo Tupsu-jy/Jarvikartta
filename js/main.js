@@ -130,10 +130,16 @@ map.on("click", function(e) {
         "'"
     markLakes(url)
 })
-Alat = 60.192059;
-Alon = 24.945831;
+Helsinkilat = 60.192059;
+Helsinkilon = 24.945831;
+let start=new Date().getTime();
 
 const haeReitti = (Llat, Llon) => {
+    while(start+3000>new Date().getTime()){
+
+    }
+
+    start = new Date().getTime();
     if(onkokartta==false){
         haku = L.Routing.control({
             waypoints: [
@@ -150,5 +156,24 @@ const haeReitti = (Llat, Llon) => {
         ])
     }
     onkokartta=true;
+    setTimeout(function(){aika=false}, 1000);
 }
 
+function wait(){
+    if(aika==true){
+        aika=false;
+        var start = new Date().getTime();
+        var end = start;
+        while(end < start + 1000) {
+            end = new Date().getTime();
+        }
+        aika=true;
+    }else{
+
+    }
+    var start = new Date().getTime();
+    var end = start;
+    while(end < start + ms) {
+        end = new Date().getTime();
+    }
+}
