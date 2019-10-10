@@ -62,7 +62,6 @@ const getLakes = async url => {
 
 const searchLakes = e => {
     e.preventDefault();
-    console.log(e)
     const searchValue = document.getElementById('input').value;
     const url = lakeAPI + "?$top=10&$filter=tolower(Nimi) eq tolower('" + searchValue + "')"
     markLakes(url)
@@ -99,7 +98,6 @@ const markLakes = async (url, method) => {
             }
         }
         let saannostely = lake.JarviSaannostely[0]
-        console.log(saannostely)
         if (!saannostely) {
             saannostely = "Ei löytynyt"
         } else {
