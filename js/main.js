@@ -18,6 +18,16 @@ const setCurrentPosition = (position) => {
     currentLong = position.coords.longitude
 }
 
+const zoomaa = (lat, lng) => {
+    let nyk = map.getCenter()
+    if(nyk.lat==lat && nyk.lng==lng){
+        map.setView([61.92, 25.74], 6)
+    }else{
+        map.setView([lat, lng], 12)
+    }
+
+}
+
 navigator.geolocation.getCurrentPosition(setCurrentPosition);
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
@@ -109,6 +119,7 @@ const markLakes = async (url, method) => {
                     lake.KoordErLong +
                     "' target='!blank'>Google Maps</a>" +
                     "<br><button type=\"button\" onclick=\"haeReitti(lake.KoordErLat, lake.KoordErLong)\">Hae reitti</button>"+
+                    "<br><button type=\"button\" onclick=\"zoomaa(lake.KoordErLat, lake.KoordErLong)\">Zoomaa</button>"+
                     "</div>"
             )
             .openPopup()
@@ -164,3 +175,4 @@ const haeReitti = (Llat, Llon) => {
     onkokartta=true;
     setTimeout(function(){aika=false}, 1000);
 }
+
