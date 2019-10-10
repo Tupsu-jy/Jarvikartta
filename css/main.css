@@ -4,57 +4,63 @@ body {
     background: lightblue;
     overflow-y: hidden;
 }
-h1 {
-    font-style: italic;
-    width: 300px;
-    margin: auto;
-}
 
 #video {
     margin-top: 5px;
     width: 100%;
     top: -500px;
-
-
-
 }
-.left a{
-    position: absolute;
+
+.navbar {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+}
+
+.links {
+    display: flex;
+    justify-content: center;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.button a {
     padding: 12px;
     width: 100px;
-    top: 0;
-    left: 0;
     text-align: center;
     text-decoration: none;
     font-size: 17px;
     background-color: dodgerblue;
     color: black;
-
 }
 
-.right a{
-    position: absolute;
-    padding: 12px;
-    width: 100px;
-    top: 0;
-    right: 0;
-    text-align: center;
-    text-decoration: none;
-    font-size: 17px;
-    background-color: dodgerblue;
-    color: black;
-
-}
-
-.right a:hover{
+.button a:hover {
     background-color: black;
     color: white;
 }
 
-.left a:hover{
-    background-color: black;
-    color: white;
+.title h1 {
+    font-style: italic;
+    width: 300px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 1em;
 }
+
+.haku {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-right: 1em;
+}
+
+.haku input {
+    margin-right: 6px;
+}
+
 #map {
     margin-top: 5px;
     height: 100%;

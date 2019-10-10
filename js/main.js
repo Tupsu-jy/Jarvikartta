@@ -10,6 +10,8 @@ let onkokartta=false;
 let currentLat = null
 let currentLong = null
 
+let form = document.getElementById("form")
+
 const setCurrentPosition = (position) => {
     currentLat = position.coords.latitude
     currentLong = position.coords.longitude
@@ -54,6 +56,15 @@ const getLakes = async url => {
         console.log(e)
     }
 }
+
+const searchLakes = e => {
+    e.preventDefault();
+    console.log(e)
+    const searchValue = document.getElementById('input').value;
+    const url = lakeAPI + "?$top=10&$filter=tolower(Nimi) eq tolower('" + searchValue + "')"
+    markLakes(url)
+}
+form.addEventListener("submit", searchLakes, true);
 
 const markLakes = async (url, method) => {
     const lakes = await getLakes(url)
