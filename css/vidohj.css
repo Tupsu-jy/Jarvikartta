@@ -1,27 +1,16 @@
 body {
     height: 100vh;
     margin: 0;
-
+    background: lightblue;
     overflow-y: hidden;
 }
 
-
 #video {
-    margin-top: 5px;
     width: 100%;
-    top: -500px;
-}
 
-#form {
-    margin-top: auto;
-    margin-bottom: auto;
 }
 
 .navbar {
-    margin-left: 50px;
-    position: absolute;
-    z-index: 3;
-    width: 100%;
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     grid-template-rows: 1fr;
@@ -30,7 +19,6 @@ body {
 }
 
 .links {
-
     display: flex;
     justify-content: left;
     margin-top: auto;
@@ -45,13 +33,18 @@ body {
     font-size: 17px;
     background-color: dodgerblue;
     color: black;
-    border-radius: 19px;
 }
 
 .button a:hover {
     background-color: black;
     color: white;
 }
+
+.title {
+    display: flex;
+    justify-content: center;
+}
+
 
 .title h1 {
     font-style: italic;
@@ -68,15 +61,9 @@ body {
     border-radius: 17px;
 }
 
-.title {
-    display: flex;
-    justify-content: center;
-}
-
 .haku {
     display: flex;
     justify-content: flex-end;
-    align-content: center;
     margin-top: auto;
     margin-bottom: auto;
     margin-right: 1em;
@@ -86,11 +73,6 @@ body {
     margin-right: 6px;
 }
 
-#map {
-    z-index: 0;
-    margin-top: 0px;
-    height: 100%;
-}
 
 .popup {
     text-align: center;

@@ -2,7 +2,8 @@ const lakeAPI =
     "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
 
 const map = L.map("map").setView([61.92, 25.74], 6)
-const markerLayer = L.layerGroup().addTo(map)  
+const markerLayer = L.layerGroup().addTo(map)
+
 
 let haku=null;
 let onkokartta=false;
@@ -24,15 +25,6 @@ L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map)
 
-const searchLegend = L.control({ position: "topright", interactive: false })
-searchLegend.onAdd = map => {
-    let div = L.DomUtil.create("div", "legend")
-    div.innerHTML =
-        '<b>Top 20</b><br><select id="select" onchange="changeSearch()"><option>Valitse</option><option>Tilavuus</option><option>Syvyys</option><option>Vesiala</option><option>Rantaviiva</option></select>'
-    L.DomEvent.disableClickPropagation(div)
-    return div
-}
-searchLegend.addTo(map)
 
 const changeSearch = () => {
     const selectValue = document.getElementById("select").value
@@ -63,7 +55,11 @@ const searchLakes = e => {
     const searchValue = document.getElementById('input').value;
     const url = lakeAPI + "?$top=10&$filter=tolower(Nimi) eq tolower('" + searchValue + "')"
     markLakes(url)
+    const url2 = lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue+"'"
+    /*console.log(lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue+"'")*/
+    markLakes(url2)
 }
+
 form.addEventListener("submit", searchLakes, true);
 
 const markLakes = async (url, method) => {
@@ -123,10 +119,10 @@ map.on("click", function(e) {
     let coord = e.latlng
     let lat = coord.lat
     let long = coord.lng
-    const latGt = lat - 0.1
-    const latLt = lat + 0.1
-    const longGt = long - 0.1
-    const longLt = long + 0.1
+    const latGt = lat - 0.03
+    const latLt = lat + 0.03
+    const longGt = long - 0.07
+    const longLt = long + 0.07
 
     const url =
         lakeAPI +
@@ -149,7 +145,6 @@ const haeReitti = (Llat, Llon) => {
     while(start+3000>new Date().getTime()){
 
     }
-
     start = new Date().getTime();
     if(onkokartta==false){
         haku = L.Routing.control({
@@ -168,23 +163,4 @@ const haeReitti = (Llat, Llon) => {
     }
     onkokartta=true;
     setTimeout(function(){aika=false}, 1000);
-}
-
-function wait(){
-    if(aika==true){
-        aika=false;
-        var start = new Date().getTime();
-        var end = start;
-        while(end < start + 1000) {
-            end = new Date().getTime();
-        }
-        aika=true;
-    }else{
-
-    }
-    var start = new Date().getTime();
-    var end = start;
-    while(end < start + ms) {
-        end = new Date().getTime();
-    }
 }

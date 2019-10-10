@@ -19,23 +19,35 @@
     </head>
     <body>
         <div class="navbar">
-                <div class="title">
-                        <h1>JÄRVIKARTTA</h1>
-                    </div>
+
             <div class="links">
                 <div class="button">
                     <a href="videosivu.html" target="_blank">Video</a>
                 </div>
+
                 <div class="button">
                     <a href="#" target="_blank">Ohje</a>
                 </div>
-            </div>
 
+            </div>
+            <div class="title">
+                <h1>JÄRVIKARTTA</h1>
+            </div>
             <div class="haku">
                 <form id="form" method="GET">
                     <input type="text" id="input" placeholder="Hae järviä" value="">
                     <input type="submit" value="Hae">
                 </form>
+                <div>
+                    <b>Top 20</b><br>
+                    <select id="select" onchange="changeSearch()">
+                        <option>Valitse</option>
+                        <option>Tilavuus</option>
+                        <option>Syvyys</option>
+                        <option>Vesiala</option>
+                        <option>Rantaviiva</option>
+                    </select>
+                </div>
             </div>
         </div>
 
