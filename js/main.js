@@ -95,7 +95,8 @@ const markLakes = async (url, method) => {
             )
         }
 
-        let sisalto="<div class='popup'>" +
+        let sisalto =
+            "<div class='popup'>" +
             "<b>" +
             lake.Nimi +
             "</b><br>Kunta: " +
@@ -103,36 +104,51 @@ const markLakes = async (url, method) => {
             "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" +
             "Järven pinta-ala: " +
             lake.Vesiala10000 +
-            " ha<br>" + "Rantaviivaa: " +
+            " ha<br>" +
+            "Rantaviivaa: " +
             lake.Rantaviiva10000 +
-            " km<br>";
+            " km<br>"
 
-        if (lake.SyvyysKeski!=null){sisalto+="Syvyys keskimäärin: " + lake.SyvyysKeski + " m<br> ";}
+        if (lake.SyvyysKeski)
+            sisalto += "Syvyys keskimäärin: " + lake.SyvyysKeski + " m<br> "
+        if (lake.SyvyysSuurin)
+            sisalto += "Suurin syvyys: " + lake.SyvyysSuurin + " m<br>"
+        if (lake.Tilavuus)
+            sisalto += "Tilavuus: " + lake.Tilavuus + " m³"
 
-        if (lake.SyvyysSuurin!=null) {sisalto+="Suurin syvyys: " + lake.SyvyysSuurin + " m<br>"}
+        sisalto += "</details>"
 
-        if (lake.Tilavuus!=null){sisalto+= "Tilavuus: " + lake.Tilavuus + " m³";}
+        if (lake.JarviSaannostely[0]) {
+            saannostelyObj = lake.JarviSaannostely[0]
+            let saannostelyStr = ""
 
+            if (saannostelyObj.Tarkoitus)
+                saannostelyStr += "Tarkoitus: " + saannostelyObj.Tarkoitus
 
-        sisalto+="</details>";
+            if (saannostelyObj.VuosiAlku)
+                saannostelyStr +=
+                    "<br>Säännöstelyn aloitusvuosi: " + saannostelyObj.VuosiAlku
 
-        let saannostely = "";
-        if (lake.JarviSaannostely[0]!=null){
-            sano=lake.JarviSaannostely[0];
-            saannostely="<details><summary class='summary'><b>Säännöstely</b></summary>"
-            if(sano.Tarkoitus){saannostely+="Tarkoitus: " +sano.Tarkoitus}
+            if (saannostelyObj.AsteikkoQ)
+                saannostelyStr +=
+                    "<br>Virtaamahavaintoasteikko: " + saannostelyObj.AsteikkoQ
 
-            if(sano.VuosiAlku){if (sano.VuosiAlku!="    "){ saannostely+="<br>Säännöstelyn aloitusvuosi: " +sano.VuosiAlku}}
+            if (saannostelyObj.AsteikkoW)
+                saannostelyStr +=
+                    "<br>Vedenkorkeushavaintoasteikko: " +
+                    saannostelyObj.AsteikkoW
 
-            if(sano.AsteikkoQ){saannostely+="<br>Virtaamahavaintoasteikko: " +sano.AsteikkoQ}
+            if (saannostelyObj.Lisatieto)
+                saannostelyStr += "<br>Lisatietoa: " + saannostelyObj.Lisatieto
 
-            if(sano.AsteikkoW){saannostely+="<br>Vedenkorkeushavaintoasteikko: " +sano.AsteikkoW}
-
-            if(sano.Lisatieto){saannostely+="<br>Lisatietoa: " +sano.Lisatieto}
-
-            sisalto+=saannostely+"</details>";
+            if (saannostelyStr !== "")
+                sisalto +=
+                    "<details><summary class='summary'><b>Säännöstely</b></summary>" +
+                    saannostelyStr +
+                    "</details>"
         }
-        sisalto+=
+
+        sisalto +=
             "<br><a href='https://maps.google.com/?q=" +
             lake.KoordErLat +
             "," +
@@ -142,10 +158,11 @@ const markLakes = async (url, method) => {
             '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
             "</div>"
 
-        let popup = L.responsivePopup({ autoPanPadding: [15,15] }).setContent(sisalto);
+        let popup = L.responsivePopup({ autoPanPadding: [15, 15] }).setContent(
+            sisalto
+        )
 
-
-/*        for (i in lake) {
+        /*        for (i in lake) {
             if (lake.hasOwnProperty(i)) {
                 if (lake[i] === null) lake[i] = "-"
             }
@@ -205,8 +222,6 @@ const markLakes = async (url, method) => {
     }
 }
 
-
-
 map.on("click", function(e) {
     let coord = e.latlng
     let lat = coord.lat
@@ -252,5 +267,4 @@ const haeReitti = (Llat, Llon) => {
         ])
     }
     onkokartta = true
-
 }
