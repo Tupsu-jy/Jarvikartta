@@ -4,37 +4,34 @@ const lakeAPI =
 const map = L.map("map").setView([61.92, 25.74], 6)
 const markerLayer = L.layerGroup().addTo(map)
 
-
-let haku=null;
-let onkokartta=false;
+let haku = null
+let onkokartta = false
 
 let currentLat = null
 let currentLong = null
 
 let form = document.getElementById("form")
 
-const setCurrentPosition = (position) => {
+const setCurrentPosition = position => {
     currentLat = position.coords.latitude
     currentLong = position.coords.longitude
 }
 
 const zoomaa = (lat, lng) => {
     let nyk = map.getCenter()
-    if(nyk.lat==lat && nyk.lng==lng){
+    if (nyk.lat == lat && nyk.lng == lng) {
         map.setView([61.92, 25.74], 6)
-    }else{
+    } else {
         map.setView([lat, lng], 12)
     }
-
 }
 
-navigator.geolocation.getCurrentPosition(setCurrentPosition);
+navigator.geolocation.getCurrentPosition(setCurrentPosition)
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {
     attribution:
         '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map)
-
 
 const changeSearch = () => {
     const selectValue = document.getElementById("select").value
@@ -61,16 +58,21 @@ const getLakes = async url => {
 }
 
 const searchLakes = e => {
-    e.preventDefault();
-    const searchValue = document.getElementById('input').value;
-    const url = lakeAPI + "?$top=10&$filter=tolower(Nimi) eq tolower('" + searchValue + "')"
+    e.preventDefault()
+    const searchValue = document.getElementById("input").value
+    const url =
+        lakeAPI +
+        "?$top=10&$filter=tolower(Nimi) eq tolower('" +
+        searchValue +
+        "')"
     markLakes(url)
-    const url2 = lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue+"'"
+    const url2 =
+        lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue + "'"
     /*console.log(lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue+"'")*/
     markLakes(url2)
 }
 
-form.addEventListener("submit", searchLakes, true);
+form.addEventListener("submit", searchLakes, true)
 
 const markLakes = async (url, method) => {
     const lakes = await getLakes(url)
@@ -106,49 +108,49 @@ const markLakes = async (url, method) => {
                     if (saannostely[i] === null) saannostely[i] = "-"
                 }
             }
-            saannostely = "Tarkoitus: " +
-            saannostely.Tarkoitus +
-            "<br>Säännöstelyn aloitusvuosi: " + 
-            saannostely.VuosiAlku +
-            "<br>Virtaamahavaintoasteikko: " +
-            saannostely.AsteikkoQ +
-            "<br>Vedenkorkeushavaintoasteikko: " +
-            saannostely.AsteikkoW +
-            "<br>Lisätieto: " +
-            saannostely.Lisatieto
+            saannostely =
+                "Tarkoitus: " +
+                saannostely.Tarkoitus +
+                "<br>Säännöstelyn aloitusvuosi: " +
+                saannostely.VuosiAlku +
+                "<br>Virtaamahavaintoasteikko: " +
+                saannostely.AsteikkoQ +
+                "<br>Vedenkorkeushavaintoasteikko: " +
+                saannostely.AsteikkoW +
+                "<br>Lisätieto: " +
+                saannostely.Lisatieto
         }
-        marker
-            .bindPopup(
-                "<div class='popup'>" +
-                    "<b>" +
-                    lake.Nimi +
-                    "</b><br>Kunta: " +
-                    lake.KuntaNimi +
-                    "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" + 
-                    "Syvyys keskimäärin: " +
-                    lake.SyvyysKeski +
-                    " m<br> Suurin syvyys: " +
-                    lake.SyvyysSuurin +
-                    " m<br> Rantaviivaa: " +
-                    lake.Rantaviiva10000 +
-                    " km<br>Tilavuus: " +
-                    lake.Tilavuus +
-                    " m³<br> Järven pinta-ala: " +
-                    lake.Vesiala10000 +
-                    " ha<br></details>" + 
-                    "<details><summary class='summary'><b>Säännöstely</b></summary>" +
-                    saannostely +
-                    "</details>" +
-                    "<br><a href='https://maps.google.com/?q=" +
-                    lake.KoordErLat +
-                    "," +
-                    lake.KoordErLong +
-                    "' target='!blank'>Google Maps</a>" +
-                    "<br><button type=\"button\" onclick=\"haeReitti(lake.KoordErLat, lake.KoordErLong)\">Hae reitti</button>"+
-                    "<br><button type=\"button\" onclick=\"zoomaa(lake.KoordErLat, lake.KoordErLong)\">Zoomaa</button>"+
-                    "</div>"
-            )
-            .openPopup()
+        let popup = L.responsivePopup({ autoPanPadding: [15,15] }).setContent(
+            "<div class='popup'>" +
+                "<b>" +
+                lake.Nimi +
+                "</b><br>Kunta: " +
+                lake.KuntaNimi +
+                "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" +
+                "Syvyys keskimäärin: " +
+                lake.SyvyysKeski +
+                " m<br> Suurin syvyys: " +
+                lake.SyvyysSuurin +
+                " m<br> Rantaviivaa: " +
+                lake.Rantaviiva10000 +
+                " km<br>Tilavuus: " +
+                lake.Tilavuus +
+                " m³<br> Järven pinta-ala: " +
+                lake.Vesiala10000 +
+                " ha<br></details>" +
+                "<details><summary class='summary'><b>Säännöstely</b></summary>" +
+                saannostely +
+                "</details>" +
+                "<br><a href='https://maps.google.com/?q=" +
+                lake.KoordErLat +
+                "," +
+                lake.KoordErLong +
+                "' target='!blank'>Google Maps</a>" +
+                '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
+                '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
+                "</div>"
+        )
+        marker.bindPopup(popup).openPopup()
     }
 }
 
@@ -174,16 +176,14 @@ map.on("click", function(e) {
         "'"
     markLakes(url)
 })
-Helsinkilat = 60.192059;
-Helsinkilon = 24.945831;
-let start=new Date().getTime();
+Helsinkilat = 60.192059
+Helsinkilon = 24.945831
+let start = new Date().getTime()
 
 const haeReitti = (Llat, Llon) => {
-    while(start+3000>new Date().getTime()){
-
-    }
-    start = new Date().getTime();
-    if(onkokartta==false){
+    while (start + 3000 > new Date().getTime()) {}
+    start = new Date().getTime()
+    if (onkokartta == false) {
         haku = L.Routing.control({
             waypoints: [
                 L.latLng(currentLat, currentLong),
@@ -198,7 +198,8 @@ const haeReitti = (Llat, Llon) => {
             L.latLng(Llat, Llon)
         ])
     }
-    onkokartta=true;
-    setTimeout(function(){aika=false}, 1000);
+    onkokartta = true
+    setTimeout(function() {
+        aika = false
+    }, 1000)
 }
-
