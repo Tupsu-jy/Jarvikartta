@@ -76,21 +76,21 @@ form.addEventListener("submit", searchLakes, true)
 
 const markLakes = async (url, method) => {
     const lakes = await getLakes(url)
-    console.log(lakes)
-    markerLayer.clearLayers()
     let number = 1
+    let marker = null
+    markerLayer.clearLayers()
     for (lake of lakes.value) {
         if (method === "top") {
             let icon = L.divIcon({
                 className: "top",
                 html: "<div>" + number + ".</div>"
             })
-            var marker = L.marker([lake.KoordErLat, lake.KoordErLong], {
+            marker = L.marker([lake.KoordErLat, lake.KoordErLong], {
                 icon
             }).addTo(markerLayer)
             number++
         } else {
-            var marker = L.marker([lake.KoordErLat, lake.KoordErLong]).addTo(
+            marker = L.marker([lake.KoordErLat, lake.KoordErLong]).addTo(
                 markerLayer
             )
         }
@@ -113,8 +113,7 @@ const markLakes = async (url, method) => {
             sisalto += "Syvyys keskimäärin: " + lake.SyvyysKeski + " m<br> "
         if (lake.SyvyysSuurin)
             sisalto += "Suurin syvyys: " + lake.SyvyysSuurin + " m<br>"
-        if (lake.Tilavuus)
-            sisalto += "Tilavuus: " + lake.Tilavuus + " m³"
+        if (lake.Tilavuus) sisalto += "Tilavuus: " + lake.Tilavuus + " m³"
 
         sisalto += "</details>"
 
