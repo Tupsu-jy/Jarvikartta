@@ -199,7 +199,5 @@ const haeReitti = (Llat, Llon) => {
         ])
     }
     onkokartta = true
-    setTimeout(function() {
-        aika = false
-    }, 1000)
+
 }
