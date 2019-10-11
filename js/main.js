@@ -94,7 +94,58 @@ const markLakes = async (url, method) => {
                 markerLayer
             )
         }
-        for (i in lake) {
+
+        let sisalto="<div class='popup'>" +
+            "<b>" +
+            lake.Nimi +
+            "</b><br>Kunta: " +
+            lake.KuntaNimi +
+            "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" +
+            "Järven pinta-ala: " +
+            lake.Vesiala10000 +
+            " ha<br>" + "Rantaviivaa: " +
+            lake.Rantaviiva10000 +
+            " km<br>";
+
+        if (lake.SyvyysKeski!=null){sisalto+="Syvyys keskimäärin: " + lake.SyvyysKeski + " m<br> ";}
+
+        if (lake.SyvyysSuurin!=null) {sisalto+="Suurin syvyys: " + lake.SyvyysSuurin + " m<br>"}
+
+        if (lake.Tilavuus!=null){sisalto+= "Tilavuus: " + lake.Tilavuus + " m³";}
+
+
+        sisalto+="</details>";
+
+        let saannostely = "";
+        if (lake.JarviSaannostely[0]!=null){
+            sano=lake.JarviSaannostely[0];
+            saannostely="<details><summary class='summary'><b>Säännöstely</b></summary>"
+            if(sano.Tarkoitus){saannostely+="Tarkoitus: " +sano.Tarkoitus}
+
+            if(sano.VuosiAlku){if (sano.VuosiAlku!="    "){ saannostely+="<br>Säännöstelyn aloitusvuosi: " +sano.VuosiAlku}}
+
+            if(sano.AsteikkoQ){saannostely+="<br>Virtaamahavaintoasteikko: " +sano.AsteikkoQ}
+
+            if(sano.AsteikkoW){saannostely+="<br>Vedenkorkeushavaintoasteikko: " +sano.AsteikkoW}
+
+            if(sano.Lisatieto){saannostely+="<br>Lisatietoa: " +sano.Lisatieto}
+
+            sisalto+=saannostely+"</details>";
+        }
+        sisalto+=
+            "<br><a href='https://maps.google.com/?q=" +
+            lake.KoordErLat +
+            "," +
+            lake.KoordErLong +
+            "' target='!blank'>Google Maps</a>" +
+            '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
+            '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
+            "</div>"
+
+        let popup = L.responsivePopup({ autoPanPadding: [15,15] }).setContent(sisalto);
+
+
+/*        for (i in lake) {
             if (lake.hasOwnProperty(i)) {
                 if (lake[i] === null) lake[i] = "-"
             }
@@ -149,10 +200,12 @@ const markLakes = async (url, method) => {
                 '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
                 '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
                 "</div>"
-        )
+        )*/
         marker.bindPopup(popup).openPopup()
     }
 }
+
+
 
 map.on("click", function(e) {
     let coord = e.latlng
