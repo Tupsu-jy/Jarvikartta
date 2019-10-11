@@ -95,67 +95,7 @@ const markLakes = async (url, method) => {
             )
         }
 
-        let sisalto =
-            "<div class='popup'>" +
-            "<b>" +
-            lake.Nimi +
-            "</b><br>Kunta: " +
-            lake.KuntaNimi +
-            "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" +
-            "Järven pinta-ala: " +
-            lake.Vesiala10000 +
-            " ha<br>" +
-            "Rantaviivaa: " +
-            lake.Rantaviiva10000 +
-            " km<br>"
-
-        if (lake.SyvyysKeski)
-            sisalto += "Syvyys keskimäärin: " + lake.SyvyysKeski + " m<br> "
-        if (lake.SyvyysSuurin)
-            sisalto += "Suurin syvyys: " + lake.SyvyysSuurin + " m<br>"
-        if (lake.Tilavuus) sisalto += "Tilavuus: " + lake.Tilavuus + " m³"
-
-        sisalto += "</details>"
-
-        if (lake.JarviSaannostely[0]) {
-            saannostelyObj = lake.JarviSaannostely[0]
-            let saannostelyStr = ""
-
-            if (saannostelyObj.Tarkoitus)
-                saannostelyStr += "Tarkoitus: " + saannostelyObj.Tarkoitus
-
-            if (saannostelyObj.VuosiAlku)
-                saannostelyStr +=
-                    "<br>Säännöstelyn aloitusvuosi: " + saannostelyObj.VuosiAlku
-
-            if (saannostelyObj.AsteikkoQ)
-                saannostelyStr +=
-                    "<br>Virtaamahavaintoasteikko: " + saannostelyObj.AsteikkoQ
-
-            if (saannostelyObj.AsteikkoW)
-                saannostelyStr +=
-                    "<br>Vedenkorkeushavaintoasteikko: " +
-                    saannostelyObj.AsteikkoW
-
-            if (saannostelyObj.Lisatieto)
-                saannostelyStr += "<br>Lisatietoa: " + saannostelyObj.Lisatieto
-
-            if (saannostelyStr !== "")
-                sisalto +=
-                    "<details><summary class='summary'><b>Säännöstely</b></summary>" +
-                    saannostelyStr +
-                    "</details>"
-        }
-
-        sisalto +=
-            "<br><a href='https://maps.google.com/?q=" +
-            lake.KoordErLat +
-            "," +
-            lake.KoordErLong +
-            "' target='!blank'>Google Maps</a>" +
-            '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
-            '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
-            "</div>"
+        let sisalto = sisaltoToString(lake)
 
         let popup = L.responsivePopup({ autoPanPadding: [15, 15] }).setContent(
             sisalto
@@ -219,6 +159,70 @@ const markLakes = async (url, method) => {
         )*/
         marker.bindPopup(popup).openPopup()
     }
+}
+
+const sisaltoToString = lake => {
+    let sisalto =
+        "<div class='popup'>" +
+        "<b>" +
+        lake.Nimi +
+        "</b><br>Kunta: " +
+        lake.KuntaNimi +
+        "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" +
+        "Järven pinta-ala: " +
+        lake.Vesiala10000 +
+        " ha<br>" +
+        "Rantaviivaa: " +
+        lake.Rantaviiva10000 +
+        " km<br>"
+
+    if (lake.SyvyysKeski)
+        sisalto += "Syvyys keskimäärin: " + lake.SyvyysKeski + " m<br> "
+    if (lake.SyvyysSuurin)
+        sisalto += "Suurin syvyys: " + lake.SyvyysSuurin + " m<br>"
+    if (lake.Tilavuus) sisalto += "Tilavuus: " + lake.Tilavuus + " m³"
+
+    sisalto += "</details>"
+
+    if (lake.JarviSaannostely[0]) {
+        saannostelyObj = lake.JarviSaannostely[0]
+        let saannostelyStr = ""
+
+        if (saannostelyObj.Tarkoitus)
+            saannostelyStr += "Tarkoitus: " + saannostelyObj.Tarkoitus
+
+        if (saannostelyObj.VuosiAlku)
+            saannostelyStr +=
+                "<br>Säännöstelyn aloitusvuosi: " + saannostelyObj.VuosiAlku
+
+        if (saannostelyObj.AsteikkoQ)
+            saannostelyStr +=
+                "<br>Virtaamahavaintoasteikko: " + saannostelyObj.AsteikkoQ
+
+        if (saannostelyObj.AsteikkoW)
+            saannostelyStr +=
+                "<br>Vedenkorkeushavaintoasteikko: " + saannostelyObj.AsteikkoW
+
+        if (saannostelyObj.Lisatieto)
+            saannostelyStr += "<br>Lisatietoa: " + saannostelyObj.Lisatieto
+
+        if (saannostelyStr !== "")
+            sisalto +=
+                "<details><summary class='summary'><b>Säännöstely</b></summary>" +
+                saannostelyStr +
+                "</details>"
+    }
+
+    sisalto +=
+        "<br><a href='https://maps.google.com/?q=" +
+        lake.KoordErLat +
+        "," +
+        lake.KoordErLong +
+        "' target='!blank'>Google Maps</a>" +
+        '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
+        '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
+        "</div>"
+    return sisalto
 }
 
 map.on("click", function(e) {
