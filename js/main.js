@@ -101,62 +101,6 @@ const markLakes = async (url, method) => {
             sisalto
         )
 
-        /*        for (i in lake) {
-            if (lake.hasOwnProperty(i)) {
-                if (lake[i] === null) lake[i] = "-"
-            }
-        }
-        let saannostely = lake.JarviSaannostely[0]
-        if (!saannostely) {
-            saannostely = "Ei löytynyt"
-        } else {
-            for (i in saannostely) {
-                if (saannostely.hasOwnProperty(i)) {
-                    if (saannostely[i] === null) saannostely[i] = "-"
-                }
-            }
-            saannostely =
-                "Tarkoitus: " +
-                saannostely.Tarkoitus +
-                "<br>Säännöstelyn aloitusvuosi: " +
-                saannostely.VuosiAlku +
-                "<br>Virtaamahavaintoasteikko: " +
-                saannostely.AsteikkoQ +
-                "<br>Vedenkorkeushavaintoasteikko: " +
-                saannostely.AsteikkoW +
-                "<br>Lisätieto: " +
-                saannostely.Lisatieto
-        }
-        let popup = L.responsivePopup({ autoPanPadding: [15,15] }).setContent(
-            "<div class='popup'>" +
-                "<b>" +
-                lake.Nimi +
-                "</b><br>Kunta: " +
-                lake.KuntaNimi +
-                "<br><br><details><summary class='summary'><b>Yleinen info</b></summary>" +
-                "Syvyys keskimäärin: " +
-                lake.SyvyysKeski +
-                " m<br> Suurin syvyys: " +
-                lake.SyvyysSuurin +
-                " m<br> Rantaviivaa: " +
-                lake.Rantaviiva10000 +
-                " km<br>Tilavuus: " +
-                lake.Tilavuus +
-                " m³<br> Järven pinta-ala: " +
-                lake.Vesiala10000 +
-                " ha<br></details>" +
-                "<details><summary class='summary'><b>Säännöstely</b></summary>" +
-                saannostely +
-                "</details>" +
-                "<br><a href='https://maps.google.com/?q=" +
-                lake.KoordErLat +
-                "," +
-                lake.KoordErLong +
-                "' target='!blank'>Google Maps</a>" +
-                '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
-                '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
-                "</div>"
-        )*/
         marker.bindPopup(popup).openPopup()
     }
 }
