@@ -135,7 +135,7 @@ const sisaltoToString = lake => {
         if (saannostelyObj.Tarkoitus)
             saannostelyStr += "Tarkoitus: " + saannostelyObj.Tarkoitus
 
-        if (saannostelyObj.VuosiAlku)
+        if (saannostelyObj.VuosiAlku && !saannostelyObj.VuosiAlku.trim() === "")
             saannostelyStr +=
                 "<br>Säännöstelyn aloitusvuosi: " + saannostelyObj.VuosiAlku
 
