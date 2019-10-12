@@ -1,10 +1,12 @@
 body {
     height: 100vh;
     margin: 0;
-
     overflow-y: hidden;
 }
-
+a {
+    color: #fff;
+    text-decoration: none;
+}
 
 #video {
     margin-top: 5px;
@@ -15,6 +17,13 @@ body {
 #form {
     margin-top: auto;
     margin-bottom: auto;
+}
+
+#map {
+    z-index: 0;
+    margin-top: 0px;
+    height: 100%;
+    cursor: pointer;
 }
 
 .navbar {
@@ -36,20 +45,25 @@ body {
     margin-bottom: auto;
 }
 
-.button a {
-    padding: 12px;
-    width: 100px;
-    text-align: center;
+.button {
+    display: inline-block;
+    padding: 0.3em 1.2em;
+    margin: 0.3em 0.1em 0.1em 0;
+    border: 0.16em solid rgba(255, 255, 255, 0);
+    border-radius: 2em;
+    box-sizing: border-box;
     text-decoration: none;
-    font-size: 17px;
-    background-color: dodgerblue;
-    color: black;
-    border-radius: 19px;
+    font-family: "Roboto", sans-serif;
+    font-weight: 300;
+    color: #fff;
+    background-color: #4e9af1;
+    text-shadow: 0 0.04em 0.04em rgba(0, 0, 0, 0.35);
+    text-align: center;
+    transition: all 0.2s;
 }
 
-.button a:hover {
-    background-color: black;
-    color: white;
+.button:hover {
+    border-color: rgba(255, 255, 255, 1);
 }
 
 .title h1 {
@@ -62,8 +76,8 @@ body {
 
     text-align: center;
     color: whitesmoke;
-    background-color: darkblue;
-    border: 2px solid darkblue;
+    background-color: #4e9af1;
+    border: 2px solid #6eaef7;
     border-radius: 17px;
 }
 
@@ -90,14 +104,12 @@ body {
     margin-right: 6px;
 }
 
-#map {
-    z-index: 0;
-    margin-top: 0px;
-    height: 100%;
-}
-
 .popup {
     text-align: center;
+}
+
+.top {
+    font-size: 2em;
 }
 
 .leaflet-popup-content {
@@ -106,6 +118,22 @@ body {
     min-width: 200px;
 }
 
-.top {
-    font-size: 2em;
+.leaflet-marker-icon {
+    transition: 1s;
 }
+
+.leaflet-marker-icon:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 12px;
+}
+
+.leaflet-container a {
+    color: #fff;
+}
+
+@media all and (max-width:30em) {
+    .button {
+        display:block;
+        margin:0.2em auto;
+    }
+} 

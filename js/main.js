@@ -90,7 +90,7 @@ const markLakes = async (url, method) => {
             }).addTo(markerLayer)
             number++
         } else {
-            marker = L.marker([lake.KoordErLat, lake.KoordErLong]).addTo(
+            marker = L.marker([lake.KoordErLat, lake.KoordErLong], {title: lake.Nimi}).addTo(
                 markerLayer
             )
         }
@@ -158,13 +158,13 @@ const sisaltoToString = lake => {
     }
 
     sisalto +=
-        "<br><a href='https://maps.google.com/?q=" +
+        "<br><div class='button'><a href='https://maps.google.com/?q=" +
         lake.KoordErLat +
         "," +
         lake.KoordErLong +
-        "' target='!blank'>Google Maps</a>" +
-        '<br><button type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
-        '<br><button type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
+        "' target='!blank'>Google Maps</a></div>" +
+        '<br><button class="button" type="button" onclick="haeReitti(lake.KoordErLat, lake.KoordErLong)">Hae reitti</button>' +
+        '<br><button class="button" type="button" onclick="zoomaa(lake.KoordErLat, lake.KoordErLong)">Zoomaa</button>' +
         "</div>"
     return sisalto
 }
