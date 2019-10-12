@@ -17,6 +17,7 @@ a {
 #form {
     margin-top: auto;
     margin-bottom: auto;
+    padding-right: 8px;
 }
 
 #map {
