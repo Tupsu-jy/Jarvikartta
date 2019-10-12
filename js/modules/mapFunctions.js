@@ -41,7 +41,7 @@ const zoomaa = e => {
     }
 }
 
-const haeReitti = async e => {
+const haeReitti = e => {
     let start = new Date().getTime()
     let haku = null
     let onkokartta = false
@@ -136,5 +136,5 @@ const markLakes = async (url, method) => {
                 .addEventListener("click", () => zoomaa(e))
         })
     }
-    marker.openPopup()
+    if (marker) marker.openPopup()
 }
