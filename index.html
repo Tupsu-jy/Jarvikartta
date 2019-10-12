@@ -16,6 +16,8 @@
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
         <script src="https://unpkg.com/leaflet-responsive-popup@0.6.4/leaflet.responsive.popup.js"></script>
 
+        <script type="module" src="js/main.js"></script>
+        <script type="module" src="js/modules/mapFunctions.js"></script>
         <script src="js/geokoodaus.js"></script>
         <script src="js/reititys.js"></script>
     </head>
@@ -42,7 +44,7 @@
                 </form>
                 <div>
                     <b>Top 20</b><br>
-                    <select id="select" onchange="changeSearch()">
+                    <select id="select">
                         <option>Valitse</option>
                         <option>Tilavuus</option>
                         <option>Syvyys</option>
@@ -62,5 +64,5 @@
         <source media="screen" src="kuvat/katu.mp4" type="video/mp4">
     </video>-->
     </body>
-    <script src="js/main.js"></script>
+    
 </html>
