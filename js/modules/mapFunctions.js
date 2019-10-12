@@ -8,6 +8,7 @@ const lakeAPI =
     "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
 
 const markerLayer = L.layerGroup().addTo(map)
+const circleLayer = L.layerGroup().addTo(map)
 
 map.on("click", e => {
     let coord = e.latlng
@@ -29,7 +30,9 @@ map.on("click", e => {
         "' and KoordErLat lt '" +
         latLt +
         "'"
-    markLakes(url)
+    circleLayer.clearLayers()
+    L.circle([lat, long], {radius: 4400}).addTo(circleLayer);
+    markLakes(url, "click")
 })
 
 const zoomaa = e => {
@@ -102,9 +105,10 @@ document.getElementById("form").addEventListener("submit", searchLakes, true)
 
 const markLakes = async (url, method) => {
     const lakes = await getLakes(url)
+    if (method !== "click") circleLayer.clearLayers()
+    markerLayer.clearLayers()
     let number = 1
     let marker = null
-    markerLayer.clearLayers()
     for (let lake of lakes.value) {
         if (method === "top") {
             let icon = L.divIcon({
