@@ -1,22 +1,26 @@
 import getLakes from "../services/jarviAPI.js"
 import { map, markerLayer, circleLayer, lakeAPI } from "../main.js"
-import { sisaltoToString } from "../helpers/mapHelpers.js"
+import { sisaltoToString, setViewAt } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
 
-export const changeSearch = () => {
+export const changeSearch = async () => {
     const selectValue = document.getElementById("select").value
     if (selectValue === "Tilavuus") {
-        markLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc", "top")
+        const tilavuusLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc", "top")
+        setViewAt(tilavuusLakes)
     } else if (selectValue === "Syvyys") {
-        markLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc", "top")
+        const syvyysLakes = await markLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc", "top")
+        setViewAt(syvyysLakes)
     } else if (selectValue === "Vesiala") {
-        markLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc", "top")
+        const vesialaLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc", "top")
+        setViewAt(vesialaLakes)
     } else if (selectValue === "Rantaviiva") {
-        markLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc", "top")
+        const rantaviivaLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc", "top")
+        setViewAt(rantaviivaLakes)
     }
 }
 
-export const searchLakes = e => {
+export const searchLakes = async e => {
     e.preventDefault()
     const searchValue = document.getElementById("input").value
     const url =
@@ -24,11 +28,15 @@ export const searchLakes = e => {
         "?$top=10&$filter=tolower(Nimi) eq tolower('" +
         searchValue +
         "')"
-    markLakes(url)
     const url2 =
         lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue + "'"
-    /*console.log(lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue+"'")*/
-    markLakes(url2)
+    const nameLakes = await markLakes(url)
+    const municipalityLakes = await markLakes(url2)
+    if (nameLakes.value.length > municipalityLakes.value.length) {
+        setViewAt(nameLakes)
+    } else {
+        setViewAt(municipalityLakes)
+    }
 }
 
 export const markLakes = async (url, method) => {
@@ -69,5 +77,5 @@ export const markLakes = async (url, method) => {
         })
     }
     if (marker) marker.openPopup()
-    if (method === "top") map.setView([61.92, 25.74], 6)
+    return lakes
 }

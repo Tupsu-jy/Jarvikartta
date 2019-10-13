@@ -1,3 +1,5 @@
+import { map } from "../main.js"
+
 export let currentLat = null
 export let currentLong = null
 
@@ -69,4 +71,16 @@ export const sisaltoToString = lake => {
 export const setCurrentPosition = position => {
     currentLat = position.coords.latitude
     currentLong = position.coords.longitude
+}
+
+export const setViewAt = lakes => {
+    let lat = 0
+    let lng = 0
+    for (let lake of lakes.value) {
+        lat += parseInt(lake.KoordErLat)
+        lng += parseInt(lake.KoordErLong)
+    }
+    lat = lat / lakes.value.length + 0.5
+    lng = lng / lakes.value.length + 0.5
+    map.setView([lat, lng], 8)
 }
