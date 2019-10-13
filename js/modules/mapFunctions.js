@@ -1,22 +1,22 @@
 import getLakes from "../services/jarviAPI.js"
-import { map, markerLayer, circleLayer, lakeAPI } from "../main.js"
-import { sisaltoToString, setViewAt } from "../helpers/mapHelpers.js"
+import { markerLayer, circleLayer, lakeAPI } from "../main.js"
+import { sisaltoToString, setViewAtLakesAvg } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
 
 export const changeSearch = async () => {
     const selectValue = document.getElementById("select").value
     if (selectValue === "Tilavuus") {
         const tilavuusLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc", "top")
-        setViewAt(tilavuusLakes)
+        setViewAtLakesAvg(tilavuusLakes)
     } else if (selectValue === "Syvyys") {
         const syvyysLakes = await markLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc", "top")
-        setViewAt(syvyysLakes)
+        setViewAtLakesAvg(syvyysLakes)
     } else if (selectValue === "Vesiala") {
         const vesialaLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc", "top")
-        setViewAt(vesialaLakes)
+        setViewAtLakesAvg(vesialaLakes)
     } else if (selectValue === "Rantaviiva") {
         const rantaviivaLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc", "top")
-        setViewAt(rantaviivaLakes)
+        setViewAtLakesAvg(rantaviivaLakes)
     }
 }
 
@@ -33,9 +33,9 @@ export const searchLakes = async e => {
     const nameLakes = await markLakes(url)
     const municipalityLakes = await markLakes(url2)
     if (nameLakes.value.length > municipalityLakes.value.length) {
-        setViewAt(nameLakes)
+        setViewAtLakesAvg(nameLakes)
     } else {
-        setViewAt(municipalityLakes)
+        setViewAtLakesAvg(municipalityLakes)
     }
 }
 

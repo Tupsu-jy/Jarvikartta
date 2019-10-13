@@ -73,7 +73,7 @@ export const setCurrentPosition = position => {
     currentLong = position.coords.longitude
 }
 
-export const setViewAt = lakes => {
+export const setViewAtLakesAvg = lakes => {
     let lat = 0
     let lng = 0
     for (let lake of lakes.value) {
