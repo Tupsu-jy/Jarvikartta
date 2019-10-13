@@ -68,24 +68,13 @@ a {
     border-color: rgba(255, 255, 255, 1);
 }
 
-.title h1 {
-    font-style: italic;
-    padding-right: 10px;
-    padding-left: 10px;
-    margin-top: auto;
-    margin-bottom: auto;
-    /*margin-left: 1em;*/
-
-    text-align: center;
-    color: whitesmoke;
-    background-color: #4e9af1;
-    border: 2px solid #6eaef7;
-    border-radius: 17px;
+.title {
+    margin: 0.1em auto auto auto;
 }
 
-.title {
-    display: flex;
-    justify-content: center;
+.title h1 {
+    margin: 0;
+    font-style: italic;
 }
 
 .summary {
@@ -111,7 +100,12 @@ a {
 }
 
 .top {
+    min-width: 1em;
+    min-height: 1em;
+    text-align: center;
     font-size: 2em;
+    border: 0.01em solid rgba(0, 0, 0, 0.35);
+    border-radius: 6px;
 }
 
 .leaflet-popup-content {
