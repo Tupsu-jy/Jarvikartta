@@ -1,5 +1,5 @@
 import getLakes from "../services/jarviAPI.js"
-import { markerLayer, circleLayer, lakeAPI } from "../main.js"
+import { map, markerLayer, circleLayer, lakeAPI } from "../main.js"
 import { sisaltoToString } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
 
@@ -69,4 +69,5 @@ export const markLakes = async (url, method) => {
         })
     }
     if (marker) marker.openPopup()
+    if (method === "top") map.setView([61.92, 25.74], 6)
 }
