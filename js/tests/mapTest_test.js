@@ -1,8 +1,10 @@
 const assert = require("assert")
+const api = require("./mocks/api") // Mocks are used when the actual result of a call is irrelevant
 
 Feature("MapTest")
 
-Scenario("After clicking on the map, I can see markers and a circle", I => {
+Scenario("After clicking on the map, I can see markers and a circle", async I => {
+    I.mockRequest('GET', 'https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi/', api.mockLake, 200)
     I.amOnPage("http://localhost:5500")
     I.click({ css: "#map" })
 
@@ -44,19 +46,21 @@ Scenario("Top20", I => {
 })
 
 Scenario("Google Maps", async I => {
+    I.mockRequest('GET', 'https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi/', api.mockLake, 200)
     I.amOnPage("http://localhost:5500")
     I.click({ css: "#map" })
 
     I.waitForElement({ css: "div.popup" }, 5)
 
     I.click(locate({ css: ".button" }).withText("Google Maps"))
-    I.wait(2)
+    I.wait(3)
     let tabs = await I.grabNumberOfOpenTabs()
 
     assert.equal(tabs, 2)
 })
 
 Scenario("Zoom", async I => {
+    I.mockRequest('GET', 'https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi/', api.mockLake, 200)
     I.amOnPage("http://localhost:5500")
     const zoomLevelBefore = await I.grabCssPropertyFrom(
         { css: "div.leaflet-proxy.leaflet-zoom-animated" },
@@ -72,10 +76,11 @@ Scenario("Zoom", async I => {
         { css: "div.leaflet-proxy.leaflet-zoom-animated" },
         "transform"
     )
-    assert.equal(zoomLevelAfter, "matrix(2048, 0, 0, 2048, 599409, 292906)")
+    assert.equal(zoomLevelAfter, "matrix(2048, 0, 0, 2048, 599453, 286038)")
 })
 
 Scenario("Routing", I => {
+    I.mockRequest('GET', 'https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi/', api.mockLake, 200)
     I.amOnPage("http://localhost:5500")
     I.click({ css: "#map" })
 

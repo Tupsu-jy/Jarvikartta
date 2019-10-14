@@ -5,7 +5,8 @@ exports.config = {
     Puppeteer: {
       url: 'http://localhost',
       show: false
-    }
+    },
+    MockRequest: {}
   },
   include: {
     I: './js/tests/config/steps_file.js'
