@@ -1,0 +1,25 @@
+{
+  "name": "Jarvikartta",
+  "version": "1.0.0",
+  "description": "sjgdyWFDGJHgdjhDJHsjsdfsfddhvJAHSCV,",
+  "main": "index.js",
+  "scripts": {
+    "testall": "npx codeceptjs run --steps",
+    "testgrep": "npx codeceptjs run --steps --grep"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Tupsu-jy/Jarvikartta.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Tupsu-jy/Jarvikartta/issues"
+  },
+  "homepage": "https://github.com/Tupsu-jy/Jarvikartta#readme",
+  "devDependencies": {
+    "codeceptjs": "^2.3.2",
+    "puppeteer": "^1.20.0"
+  }
+}

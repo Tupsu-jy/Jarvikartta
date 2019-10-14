@@ -1,3 +1,4 @@
+import getLakes from "./services/jarviAPI.js"
 import { markLakes, changeSearch, searchLakes } from "./modules/mapFunctions.js"
 import { setCurrentPosition } from "./helpers/mapHelpers.js"
 
@@ -11,7 +12,7 @@ navigator.geolocation.getCurrentPosition(setCurrentPosition)
 document.getElementById("select").addEventListener('change', changeSearch);
 document.getElementById("form").addEventListener("submit", searchLakes)
 
-map.on("click", e => {
+map.on("click", async e => {
     let coord = e.latlng
     let lat = coord.lat
     let long = coord.lng
@@ -33,7 +34,8 @@ map.on("click", e => {
         "'"
     circleLayer.clearLayers()
     L.circle([lat, long], { radius: 4400, opacity: 0.3 }).addTo(circleLayer)
-    markLakes(url, "click")
+    const lakes = await getLakes(url)
+    markLakes(lakes, "click")
 })
 
 L.tileLayer("https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png", {

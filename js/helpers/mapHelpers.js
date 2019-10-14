@@ -82,5 +82,5 @@ export const setViewAtLakesAvg = lakes => {
     }
     lat = lat / lakes.value.length + 0.5
     lng = lng / lakes.value.length + 0.5
-    map.setView([lat, lng], 8)
+    map.setView([lat, lng], 8) // mb zoom level depending on coordinate variation
 }

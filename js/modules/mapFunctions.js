@@ -2,20 +2,25 @@ import getLakes from "../services/jarviAPI.js"
 import { markerLayer, circleLayer, lakeAPI } from "../main.js"
 import { sisaltoToString, setViewAtLakesAvg } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
+import merge from "../libraries/lodash_merge.js"
 
 export const changeSearch = async () => {
     const selectValue = document.getElementById("select").value
     if (selectValue === "Tilavuus") {
-        const tilavuusLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc", "top")
+        const tilavuusLakes = await getLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc")
+        markLakes(tilavuusLakes, "top")
         setViewAtLakesAvg(tilavuusLakes)
     } else if (selectValue === "Syvyys") {
-        const syvyysLakes = await markLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc", "top")
+        const syvyysLakes = await getLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc")
+        markLakes(syvyysLakes, "top")
         setViewAtLakesAvg(syvyysLakes)
     } else if (selectValue === "Vesiala") {
-        const vesialaLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc", "top")
+        const vesialaLakes = await getLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc")
+        markLakes(vesialaLakes, "top")
         setViewAtLakesAvg(vesialaLakes)
     } else if (selectValue === "Rantaviiva") {
-        const rantaviivaLakes = await markLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc", "top")
+        const rantaviivaLakes = await getLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc")
+        markLakes(rantaviivaLakes, "top")
         setViewAtLakesAvg(rantaviivaLakes)
     }
 }
@@ -30,17 +35,14 @@ export const searchLakes = async e => {
         "')"
     const url2 =
         lakeAPI + "?$top=100&$filter=KuntaNimi eq '" + searchValue + "'"
-    const nameLakes = await markLakes(url)
-    const municipalityLakes = await markLakes(url2)
-    if (nameLakes.value.length > municipalityLakes.value.length) {
-        setViewAtLakesAvg(nameLakes)
-    } else {
-        setViewAtLakesAvg(municipalityLakes)
-    }
+    const nameLakes = await getLakes(url)
+    const municipalityLakes = await getLakes(url2)
+    const mergedLakes = merge(nameLakes, municipalityLakes)
+    markLakes(mergedLakes)
+    setViewAtLakesAvg(mergedLakes)
 }
 
-export const markLakes = async (url, method) => {
-    const lakes = await getLakes(url)
+export const markLakes = async (lakes, method) => {
     if (method !== "click") circleLayer.clearLayers()
     markerLayer.clearLayers()
     let number = 1
@@ -77,5 +79,4 @@ export const markLakes = async (url, method) => {
         })
     }
     if (marker) marker.openPopup()
-    return lakes
 }
