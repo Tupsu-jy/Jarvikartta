@@ -1,4 +1,5 @@
 import getLakes from "../services/jarviAPI.js"
+import getSaannostely from "../services/saannostelyAPI.js"
 import { markerLayer, circleLayer, lakeAPI } from "../main.js"
 import { sisaltoToString, setViewAtLakesAvg } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
@@ -47,7 +48,12 @@ export const markLakes = async (lakes, method) => {
     markerLayer.clearLayers()
     let number = 1
     let marker = null
+    let saannostely=null
     for (let lake of lakes.value) {
+
+        if (lake.JarviSaannostely[0])
+            saannostely=await getSaannostely(lake);
+
         if (method === "top") {
             let icon = L.divIcon({
                 className: "top",
@@ -63,7 +69,7 @@ export const markLakes = async (lakes, method) => {
             }).addTo(markerLayer)
         }
 
-        let sisalto = sisaltoToString(lake)
+        let sisalto = sisaltoToString(lake, saannostely)
 
         let popup = L.responsivePopup({ autoPanPadding: [15, 15] }).setContent(
             sisalto
@@ -80,3 +86,4 @@ export const markLakes = async (lakes, method) => {
     }
     if (marker) marker.openPopup()
 }
+

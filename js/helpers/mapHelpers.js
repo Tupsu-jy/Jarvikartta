@@ -3,7 +3,7 @@ import { map } from "../main.js"
 export let currentLat = null
 export let currentLong = null
 
-export const sisaltoToString = lake => {
+export const sisaltoToString = (lake, saannostely) => {
     let sisalto =
         "<div class='popup'>" +
         "<b>" +
@@ -47,6 +47,10 @@ export const sisaltoToString = lake => {
 
         if (saannostelyObj.Lisatieto)
             saannostelyStr += "<br>Lisatietoa: " + saannostelyObj.Lisatieto
+
+        if (saannostely)
+            if(saannostely.ElyNimi)
+                saannostelyStr += "<br>Ely: " + saannostely.ElyNimi
 
         if (saannostelyStr !== "")
             sisalto +=
