@@ -13,14 +13,13 @@ export const zoomaa = e => {
 let start = new Date().getTime()
 
 export const haeReitti = e => {
-
     let haku = null
     let onkokartta = false
 
     while (start + 3000 > new Date().getTime()) {}
 
     start = new Date().getTime()
-    console.log(""+start)
+    console.log("" + start)
     if (onkokartta == false) {
         haku = L.Routing.control({
             waypoints: [

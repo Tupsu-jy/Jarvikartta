@@ -8,19 +8,27 @@ import merge from "../libraries/lodash_merge.js"
 export const changeSearch = async () => {
     const selectValue = document.getElementById("select").value
     if (selectValue === "Tilavuus") {
-        const tilavuusLakes = await getLakes(lakeAPI + "?$top=20&$orderby=Tilavuus desc")
+        const tilavuusLakes = await getLakes(
+            lakeAPI + "?$top=20&$orderby=Tilavuus desc"
+        )
         markLakes(tilavuusLakes, "top")
         setViewAtLakesAvg(tilavuusLakes)
     } else if (selectValue === "Syvyys") {
-        const syvyysLakes = await getLakes(lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc")
+        const syvyysLakes = await getLakes(
+            lakeAPI + "?$top=20&$orderby=SyvyysSuurin desc"
+        )
         markLakes(syvyysLakes, "top")
         setViewAtLakesAvg(syvyysLakes)
     } else if (selectValue === "Vesiala") {
-        const vesialaLakes = await getLakes(lakeAPI + "?$top=20&$orderby=Vesiala10000 desc")
+        const vesialaLakes = await getLakes(
+            lakeAPI + "?$top=20&$orderby=Vesiala10000 desc"
+        )
         markLakes(vesialaLakes, "top")
         setViewAtLakesAvg(vesialaLakes)
     } else if (selectValue === "Rantaviiva") {
-        const rantaviivaLakes = await getLakes(lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc")
+        const rantaviivaLakes = await getLakes(
+            lakeAPI + "?$top=20&$orderby=Rantaviiva10000 desc"
+        )
         markLakes(rantaviivaLakes, "top")
         setViewAtLakesAvg(rantaviivaLakes)
     }
@@ -48,11 +56,9 @@ export const markLakes = async (lakes, method) => {
     markerLayer.clearLayers()
     let number = 1
     let marker = null
-    let saannostely=null
+    let saannostely = null
     for (let lake of lakes.value) {
-
-        if (lake.JarviSaannostely[0])
-            saannostely=await getSaannostely(lake);
+        if (lake.JarviSaannostely[0]) saannostely = await getSaannostely(lake)
 
         if (method === "top") {
             let icon = L.divIcon({
@@ -65,7 +71,7 @@ export const markLakes = async (lakes, method) => {
             number++
         } else {
             marker = L.marker([lake.KoordErLat, lake.KoordErLong], {
-                title: lake.Nimi,
+                title: lake.Nimi
             }).addTo(markerLayer)
         }
 
@@ -86,4 +92,3 @@ export const markLakes = async (lakes, method) => {
     }
     if (marker) marker.openPopup()
 }
-

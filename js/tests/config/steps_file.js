@@ -1,4 +1,4 @@
-const api = require("../mocks/api") // Mocks are used when the actual result of a call is irrelevant
+const api = require("../mocks/api")
 // in this file you can append custom step methods to 'I' object
 
 module.exports = function() {

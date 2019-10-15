@@ -49,7 +49,7 @@ export const sisaltoToString = (lake, saannostely) => {
             saannostelyStr += "<br>Lisatietoa: " + saannostelyObj.Lisatieto
 
         if (saannostely)
-            if(saannostely.ElyNimi)
+            if (saannostely.ElyNimi)
                 saannostelyStr += "<br>Ely: " + saannostely.ElyNimi
 
         if (saannostelyStr !== "")

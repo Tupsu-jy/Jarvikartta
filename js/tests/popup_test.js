@@ -1,5 +1,4 @@
 const assert = require("assert")
-const api = require("./mocks/api") // Mocks are used when the actual result of a call is irrelevant
 
 Feature('Popup');
 
