@@ -3,7 +3,7 @@ import { map } from "../main.js"
 export let currentLat = null
 export let currentLong = null
 
-export const sisaltoToString = (lake, saannostely) => {
+export const sisaltoToString = (lake, saannostely, luvanhaltija, styyppi, lupapaatos) => {
     let sisalto =
         "<div class='popup'>" +
         "<b>" +
@@ -48,9 +48,36 @@ export const sisaltoToString = (lake, saannostely) => {
         if (saannostelyObj.Lisatieto)
             saannostelyStr += "<br>Lisatietoa: " + saannostelyObj.Lisatieto
 
+        //saannostely, luvanhaltija, styyppi, lupapaatos
         if (saannostely)
             if (saannostely.ElyNimi)
                 saannostelyStr += "<br>Ely: " + saannostely.ElyNimi
+
+        if (luvanhaltija)
+            if (luvanhaltija.Nimi)
+                saannostelyStr += "<br>Säännöstelyluvan haltijan nimi: " + luvanhaltija.Nimi
+
+        if (styyppi)
+            if (styyppi.Selite)
+                saannostelyStr += "<br>Säännöstelytyyppi: " + styyppi.Selite
+
+
+
+        for (let lupa of lupapaatos.value){
+            if (lupa.Antaja){
+                saannostelyStr += "<br>Luvan antajan nimi: " + lupa.Antaja
+            }
+
+            if (lupa.Lainvoima==1){
+                saannostelyStr += "<br>Päätöksellä on lainvoima"
+            }else{
+                saannostelyStr += "<br>Päätöksellä ei ole lainvoimaa"
+            }
+
+            if (lupa.Pvm){
+                saannostelyStr += "<br>Lupapäätöksen antamispäivämäärä: " + lupa.Pvm
+            }
+        }
 
         if (saannostelyStr !== "")
             sisalto +=

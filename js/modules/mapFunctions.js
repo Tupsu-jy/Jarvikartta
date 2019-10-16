@@ -1,9 +1,12 @@
 import getLakes from "../services/jarviAPI.js"
 import getSaannostely from "../services/saannostelyAPI.js"
+import getLuvanhaltija from "../services/luvanhaltijaAPI.js"
 import { markerLayer, circleLayer, lakeAPI, notifier } from "../main.js"
 import { sisaltoToString, setViewAtLakesAvg } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
 import merge from "../libraries/lodash_merge.js"
+import getStyyppi from "../services/styyppiAPI.js";
+import getLupapaatos from "../services/lupapaatosAPI.js";
 
 export const changeSearch = async () => {
     const selectValue = document.getElementById("select").value
@@ -59,9 +62,23 @@ export const markLakes = async (lakes, method) => {
     markerLayer.clearLayers()
     let number = 1
     let marker = null
-    let saannostely = null
+    let saannostely, luvanhaltija, styyppi, lupapaatos = null
+
     for (let lake of lakes.value) {
-        if (lake.JarviSaannostely[0]) saannostely = await getSaannostely(lake)
+        if (lake.JarviSaannostely[0]){
+            saannostely = await getSaannostely(lake)
+            //console.log(saannostely)
+            if(saannostely.LuvanhaltijaValtio_Id)
+                luvanhaltija=await getLuvanhaltija(saannostely.Saannostely_Id)
+
+            if(saannostely.SaannostelyTyyppi_Id)
+                styyppi=await getStyyppi(saannostely.SaannostelyTyyppi_Id)
+            console.log
+            //if(saannostely.SaannostelyLupapaatos){
+                console.log("saannostely.Saannostely_Id")
+                lupapaatos=await getLupapaatos(saannostely.Saannostely_Id)
+           // }
+        }
 
         if (method === "top") {
             let icon = L.divIcon({
@@ -78,7 +95,7 @@ export const markLakes = async (lakes, method) => {
             }).addTo(markerLayer)
         }
 
-        let sisalto = sisaltoToString(lake, saannostely)
+        let sisalto = sisaltoToString(lake, saannostely, luvanhaltija, styyppi, lupapaatos)
 
         let popup = L.responsivePopup({ autoPanPadding: [15, 15] }).setContent(
             sisalto
