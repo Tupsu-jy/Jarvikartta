@@ -1,4 +1,4 @@
-exports.mockLake = {
+exports.mockOneLake = {
     value: [
         {
             JarviSaannostely: [],
@@ -37,4 +37,8 @@ exports.mockLake = {
             SyvyysSuurinKoordErLong: null
         }
     ]
+}
+
+exports.mockEmptyLake = {
+    value: []
 }

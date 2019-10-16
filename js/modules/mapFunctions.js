@@ -1,6 +1,6 @@
 import getLakes from "../services/jarviAPI.js"
 import getSaannostely from "../services/saannostelyAPI.js"
-import { markerLayer, circleLayer, lakeAPI } from "../main.js"
+import { markerLayer, circleLayer, lakeAPI, notifier } from "../main.js"
 import { sisaltoToString, setViewAtLakesAvg } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
 import merge from "../libraries/lodash_merge.js"
@@ -52,6 +52,9 @@ export const searchLakes = async e => {
 }
 
 export const markLakes = async (lakes, method) => {
+    if (lakes.value.length === 0) {
+        notifier.alert("Järviä ei löytynyt")
+    }
     if (method !== "click") circleLayer.clearLayers()
     markerLayer.clearLayers()
     let number = 1

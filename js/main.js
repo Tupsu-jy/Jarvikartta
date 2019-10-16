@@ -2,14 +2,17 @@ import getLakes from "./services/jarviAPI.js"
 import { markLakes, changeSearch, searchLakes } from "./modules/mapFunctions.js"
 import { setCurrentPosition } from "./helpers/mapHelpers.js"
 
-export const lakeAPI = "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
-export const map = L.map("map").setView([61.92, 25.74], 6)
+export const lakeAPI =
+    "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
+export const map = L.map("map").setView([64.52, 25.74], 6)
 export const markerLayer = L.layerGroup().addTo(map)
 export const circleLayer = L.layerGroup().addTo(map)
 
+export const notifier = new AWN()
+
 navigator.geolocation.getCurrentPosition(setCurrentPosition)
 
-document.getElementById("select").addEventListener('change', changeSearch);
+document.getElementById("select").addEventListener("change", changeSearch)
 document.getElementById("form").addEventListener("submit", searchLakes)
 
 map.on("click", async e => {

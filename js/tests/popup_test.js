@@ -1,13 +1,13 @@
 const assert = require("assert")
 
-Feature('Popup');
+Feature("Popup")
 
-Before((I) => {
+Before(I => {
     I.amOnPage("http://localhost:5500")
-});
+})
 
 Scenario("Routing", I => {
-    I.clickOnMap(true)
+    I.clickOnMap(true, 1)
 
     I.waitForElement({ css: "div.popup" }, 5)
 
@@ -24,33 +24,24 @@ Scenario("Routing", I => {
 })
 
 Scenario("Google Maps", async I => {
-    I.clickOnMap(true)
+    I.clickOnMap(true, 1)
 
     I.waitForElement({ css: "div.popup" }, 5)
 
     I.click(locate({ css: ".button" }).withText("Google Maps"))
-    I.wait(3)
+    I.wait(5)
     let tabs = await I.grabNumberOfOpenTabs()
 
     assert.equal(tabs, 2)
 })
 
 Scenario("Zoom", async I => {
-    I.clickOnMap(true)
-    const zoomLevelBefore = await I.grabCssPropertyFrom(
-        { css: "div.leaflet-proxy.leaflet-zoom-animated" },
-        "transform"
-    )
-    assert.equal(zoomLevelBefore, "matrix(32, 0, 0, 32, 9363.46, 4577.83)")
+    I.clickOnMap(true, 1)
 
     I.waitForElement({ css: "div.popup" }, 5)
 
     I.click(locate({ css: ".button" }).withText("Zoom"))
 
-    const zoomLevelAfter = await I.grabCssPropertyFrom(
-        { css: "div.leaflet-proxy.leaflet-zoom-animated" },
-        "transform"
-    )
-    assert.equal(zoomLevelAfter, "matrix(2048, 0, 0, 2048, 599453, 286038)")
+    const viewAt = await I.getCurrentView()
+    assert.equal(viewAt, "matrix(2048, 0, 0, 2048, 599453, 286038)")
 })
-

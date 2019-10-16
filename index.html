@@ -5,7 +5,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <meta http-equiv="X-UA-Compatible" content="ie=edge" />
         <title>Document</title>
-        <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet"> 
+        <link
+            href="https://fonts.googleapis.com/css?family=Roboto&display=swap"
+            rel="stylesheet"
+        />
         <link
             rel="stylesheet"
             href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
@@ -13,30 +16,33 @@
         <link rel="stylesheet" href="css/main.css" />
         <link rel="stylesheet" href="css/reititys.css" />
         <link rel="stylesheet" href="css/geokoodaus.css" />
-        <link rel="stylesheet" href="https://unpkg.com/leaflet-responsive-popup@0.6.4/leaflet.responsive.popup.css" />
+        <link
+            rel="stylesheet"
+            href="https://unpkg.com/leaflet-responsive-popup@0.6.4/leaflet.responsive.popup.css"
+        />
+        <link rel="stylesheet" href="css/awesomenotifications.css" />
 
-        
         <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"></script>
         <script src="https://unpkg.com/leaflet-responsive-popup@0.6.4/leaflet.responsive.popup.js"></script>
+        <script src="js/libraries/awesomenotifications.js"></script>
         <script src="js/libraries/geokoodaus.js"></script>
         <script src="js/libraries/reititys.js"></script>
         <script type="module" src="js/main.js"></script>
-
     </head>
     <body>
         <div class="navbar">
             <div class="links">
                 <div class="button">
-                    <a href="videosivu.html" >Video</a>
+                    <a href="videosivu.html">Video</a>
                 </div>
                 <div class="button">
-                    <a href="#" >Ohje</a>
+                    <a href="#">Ohje</a>
                 </div>
                 <div class="button">
-                    <a href="videosivu.html" >Säännöstely</a>
+                    <a href="videosivu.html">Säännöstely</a>
                 </div>
                 <div class="button">
-                    <a href="#" >Info</a>
+                    <a href="#">Info</a>
                 </div>
             </div>
             <div class="button title">
@@ -44,11 +50,16 @@
             </div>
             <div class="haku">
                 <form id="form" method="GET">
-                    <input type="text" id="input" placeholder="Hae järviä" value="">
-                    <input class="button" type="submit" value="Hae">
+                    <input
+                        type="text"
+                        id="input"
+                        placeholder="Hae järviä"
+                        value=""
+                    />
+                    <input class="button" type="submit" value="Hae" />
                 </form>
                 <div>
-                    <b>Top 20</b><br>
+                    <b>Top 20</b><br />
                     <select id="select">
                         <option>Valitse</option>
                         <option>Tilavuus</option>
@@ -69,5 +80,4 @@
         <source media="screen" src="kuvat/katu.mp4" type="video/mp4">
     </video>-->
     </body>
-    
 </html>

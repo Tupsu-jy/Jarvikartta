@@ -4,7 +4,7 @@ import { currentLat, currentLong } from "../helpers/mapHelpers.js"
 export const zoomaa = e => {
     let nyk = map.getCenter()
     if (nyk.lat == e.popup._latlng.lat && nyk.lng == e.popup._latlng.lng) {
-        map.setView([61.92, 25.74], 6)
+        map.setView([nyk.lat, nyk.lng], 6)
     } else {
         map.setView([e.popup._latlng.lat, e.popup._latlng.lng], 12)
     }

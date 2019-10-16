@@ -78,13 +78,15 @@ export const setCurrentPosition = position => {
 }
 
 export const setViewAtLakesAvg = lakes => {
-    let lat = 0
-    let lng = 0
-    for (let lake of lakes.value) {
-        lat += parseInt(lake.KoordErLat)
-        lng += parseInt(lake.KoordErLong)
+    if (lakes.value.length > 0) {
+        let lat = 0
+        let lng = 0
+        for (let lake of lakes.value) {
+            lat += parseInt(lake.KoordErLat)
+            lng += parseInt(lake.KoordErLong)
+        }
+        lat = lat / lakes.value.length + 0.5
+        lng = lng / lakes.value.length + 0.5
+        map.setView([lat, lng], 8) // mb zoom level depending on coordinate variation
     }
-    lat = lat / lakes.value.length + 0.5
-    lng = lng / lakes.value.length + 0.5
-    map.setView([lat, lng], 8) // mb zoom level depending on coordinate variation
 }
