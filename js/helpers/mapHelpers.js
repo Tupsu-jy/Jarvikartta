@@ -28,7 +28,7 @@ export const sisaltoToString = (lake, saannostely, luvanhaltija, styyppi, lupapa
 
     if (lake.JarviSaannostely[0]) {
         let saannostelyObj = lake.JarviSaannostely[0]
-        let saannostelyStr = ""
+        let saannostelyStr, lupapaatokset = ""
 
         if (saannostelyObj.Tarkoitus)
             saannostelyStr += "Tarkoitus: " + saannostelyObj.Tarkoitus
@@ -62,27 +62,36 @@ export const sisaltoToString = (lake, saannostely, luvanhaltija, styyppi, lupapa
                 saannostelyStr += "<br>Säännöstelytyyppi: " + styyppi.Selite
 
 
-
+        let i=1;
         for (let lupa of lupapaatos.value){
+            lupapaatokset+="<details><summary class='summary'><b>Lupapäätös "+i+"</b></summary>"
             if (lupa.Antaja){
-                saannostelyStr += "<br>Luvan antajan nimi: " + lupa.Antaja
+                lupapaatokset += "<br>Luvan antajan nimi: " + lupa.Antaja
             }
 
             if (lupa.Lainvoima==1){
-                saannostelyStr += "<br>Päätöksellä on lainvoima"
+                lupapaatokset += "<br>Päätöksellä on lainvoima"
             }else{
-                saannostelyStr += "<br>Päätöksellä ei ole lainvoimaa"
+                lupapaatokset += "<br>Päätöksellä ei ole lainvoimaa"
             }
 
             if (lupa.Pvm){
-                saannostelyStr += "<br>Lupapäätöksen antamispäivämäärä: " + lupa.Pvm
+                lupapaatokset += "<br>Lupapäätöksen antamispäivämäärä: " + lupa.Pvm.split("T")[0].replace(/-/g, " ");
             }
+            i++;
+            lupapaatokset+="</details>"
         }
 
         if (saannostelyStr !== "")
             sisalto +=
                 "<details><summary class='summary'><b>Säännöstely</b></summary>" +
                 saannostelyStr +
+                "</details>"
+
+        if (lupapaatokset !== "")
+            sisalto +=
+                "<details><summary class='summary'><b>Lupapäätökset</b></summary>" +
+                lupapaatokset +
                 "</details>"
     }
 
