@@ -1,4 +1,4 @@
-import getLakes from "./services/jarviAPI.js"
+import {getLakes} from "./services/jarviAPI.js"
 import { markLakes, changeSearch, searchLakes } from "./modules/mapFunctions.js"
 import { setCurrentPosition } from "./helpers/mapHelpers.js"
 

@@ -1,12 +1,8 @@
-import getLakes from "../services/jarviAPI.js"
-import getSaannostely from "../services/saannostelyAPI.js"
-import getLuvanhaltija from "../services/luvanhaltijaAPI.js"
+import {getLakes, getSaannostely, getLuvanhaltija, getStyyppi, getLupapaatos} from "../services/jarviAPI.js"
 import { markerLayer, circleLayer, lakeAPI, notifier } from "../main.js"
 import { sisaltoToString, setViewAtLakesAvg } from "../helpers/mapHelpers.js"
 import { zoomaa, haeReitti } from "./popupFunctions.js"
 import merge from "../libraries/lodash_merge.js"
-import getStyyppi from "../services/styyppiAPI.js";
-import getLupapaatos from "../services/lupapaatosAPI.js";
 
 export const changeSearch = async () => {
     const selectValue = document.getElementById("select").value

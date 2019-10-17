@@ -30,7 +30,7 @@ export const sisaltoToString = (lake, saannostely, luvanhaltija, styyppi, lupapa
         let saannostelyObj = lake.JarviSaannostely[0]
         let saannostelyStr = ""
         let lupapaatokset = ""
-        
+
         if (saannostelyObj.Tarkoitus)
             saannostelyStr += "Tarkoitus: " + saannostelyObj.Tarkoitus
 
