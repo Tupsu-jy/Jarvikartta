@@ -52,7 +52,7 @@
     height: 26px;
     border: none;
     background-color: white;
-    background-image: url(images/geocoder.png);
+    background-image: url("https://www.hmlry.fi/wp-content/uploads/2019/01/Kotimaiset-vadelmat_panoramajpg.jpg");
     background-repeat: no-repeat;
     background-position: center;
     cursor: pointer;
@@ -64,7 +64,7 @@
 }
 
 .leaflet-control-geocoder-throbber .leaflet-control-geocoder-icon {
-    background-image: url(images/throbber.gif);
+    background-image: url("https://www.hmlry.fi/wp-content/uploads/2019/01/Kotimaiset-vadelmat_panoramajpg.jpg");
 }
 
 .leaflet-control-geocoder-form-no-error {
