@@ -5,7 +5,8 @@
 }*/
 
 export const modalInfo = () => {
-    let tiedot="<b>asd</b>"
+    let tiedot="<p style='font-size: large'>Järvikartta tehtiin Metropolian tieto- ja viestintätekniikan opintojen yhteydessä.<br>" +
+                "Projektin toteuttivat: Jaakko Ylinen, Jaakko Hotti, Matias Mäkelä ja Nikita Essine</p>"
     new AWN().modal(tiedot);
 }
 
