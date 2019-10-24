@@ -1,7 +1,7 @@
 import {getLakes} from "./services/jarviAPI.js"
 import { markLakes, changeSearch, searchLakes } from "./modules/mapFunctions.js"
 import { setCurrentPosition } from "./helpers/mapHelpers.js"
-import { modalSaannostely, modalInfo, modalOhje } from "./modules/menuFunctions.js"
+import { /*modalSaannostely,*/ modalInfo, modalOhje } from "./modules/menuFunctions.js"
 
 export const lakeAPI =
     "https://rajapinnat.ymparisto.fi/api/jarvirajapinta/1.0/odata/Jarvi"
@@ -15,7 +15,7 @@ navigator.geolocation.getCurrentPosition(setCurrentPosition)
 
 document.getElementById("select").addEventListener("change", changeSearch)
 document.getElementById("form").addEventListener("submit", searchLakes)
-document.getElementById("saannostely").addEventListener("click", modalSaannostely)
+/*document.getElementById("saannostely").addEventListener("click", modalSaannostely)*/
 document.getElementById("info").addEventListener("click", modalInfo)
 document.getElementById("ohje").addEventListener("click", modalOhje)
 
