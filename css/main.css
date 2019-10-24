@@ -86,7 +86,7 @@ a {
     display: flex;
     justify-content: flex-end;
     align-content: center;
-    margin-top: auto;
+    margin-top: 10px;
     margin-bottom: auto;
     margin-right: 1em;
 }
@@ -106,6 +106,10 @@ a {
     font-size: 2em;
     border: 0.01em solid rgba(0, 0, 0, 0.35);
     border-radius: 6px;
+}
+
+.topselect {
+    padding-bottom: 10px;
 }
 
 .leaflet-popup-content {
@@ -150,10 +154,11 @@ a {
 .dropbtn {
     background-color: #4e9af1;
     color: white;
-    padding: 16px;
+    margin: 6px;
+    padding: 24px;
     font-size: 16px;
     border: none;
-
+    border-radius: 10px;
 }
 
 /* The container <div> - needed to position the dropdown content */
