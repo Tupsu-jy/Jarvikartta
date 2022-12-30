@@ -21,7 +21,7 @@
   "devDependencies": {
     "@pollyjs/adapter-puppeteer": "^2.6.3",
     "@pollyjs/core": "^2.6.3",
-    "codeceptjs": "^2.3.3",
+    "codeceptjs": "^3.0.0",
     "puppeteer": "^1.20.0"
   },
   "dependencies": {}
